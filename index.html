@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo Reyna - Servicios Múltiples</title>
+    
+    <!-- Fuentes tipográficas e Iconos en línea -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Enlace a estilos externos -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Estilos base e icono R integrados -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        :root {
+            --blue-dark: #0b1f3a;
+            --blue-medium: #1a365d;
+            --gold: #d4af37;
+            --gold-dark: #aa8c2c;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+        }
+        body { background-color: var(--light-bg); color: var(--text-dark); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* Navegación y Encabezado */
+        .header { background-color: var(--blue-dark); position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid var(--gold); }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-container { display: flex; align-items: center; gap: 14px; }
+        
+        /* Emblema con la R de Grupo Reyna */
+        .brand-icon-r {
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--blue-dark) 0%, #1a365d 100%);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.7rem;
+            font-weight: 900;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            flex-shrink: 0;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .logo-container:hover .brand-icon-r {
+            transform: scale(1.08);
+            border-color: #ffffff;
+        }
+
+        .brand-title { color: var(--white); font-weight: 800; font-size: 1.25rem; display: block; line-height: 1.1; }
+        .brand-sub { color: var(--gold); font-size: 0.65rem; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; }
+        .navbar { display: flex; gap: 15px; }
+        .nav-link { color: var(--white); padding: 8px 14px; border-radius: 6px; font-size: 0.9rem; font-weight: 600; }
+        .nav-link:hover, .nav-link.active { background-color: rgba(212, 175, 55, 0.2); color: var(--gold); }
+        
+        /* Banner Hero */
+        .hero { position: relative; background: linear-gradient(135deg, rgba(11,31,58,0.92), rgba(26,54,93,0.85)), url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80') center/cover; color: var(--white); padding: 90px 20px; text-align: center; }
+        .hero-badge { display: inline-block; border: 1px solid var(--gold); color: var(--gold); padding: 6px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; background: rgba(0, 0, 0, 0.4); }
+        .hero h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 15px; }
+        .hero p { color: #cbd5e1; font-size: 1.05rem; margin-bottom: 30px; max-width: 750px; margin-left: auto; margin-right: auto; }
+        .hero-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
+        .quote-card { background: rgba(255, 255, 255, 0.1); border-left: 4px solid var(--gold); padding: 16px 20px; border-radius: 0 8px 8px 0; text-align: left; max-width: 650px; margin: 0 auto; backdrop-filter: blur(5px); }
+        .quote-card p { font-style: italic; color: #f1f5f9; font-size: 0.9rem; margin: 0; }
+        
+        /* Botones */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; border: none; }
+        .btn-primary { background-color: var(--blue-medium); color: var(--white); }
+        .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--blue-dark); }
+        .btn-full { width: 100%; }
+        
+        /* Tarjetas y Servicios */
+        .section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        .bg-light { background-color: var(--white); max-width: 100%; }
+        .section-title { text-align: center; margin-bottom: 40px; }
+        .section-title h2 { font-size: 2rem; color: var(--blue-dark); font-weight: 800; }
+        .section-title p { color: var(--text-muted); font-size: 0.95rem; }
+        .grid { display: grid; gap: 25px; }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
+        .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
+        .card-img-container { height: 200px; position: relative; background-color: var(--blue-dark); }
+        .card-img { width: 100%; height: 100%; object-fit: cover; }
+        .card-badge { position: absolute; bottom: 12px; left: 12px; background: var(--blue-dark); color: var(--white); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+        .badge-gold { background: var(--gold); color: var(--blue-dark); }
+        .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-body h3 { color: var(--blue-dark); margin-bottom: 10px; font-size: 1.2rem; }
+        .card-body p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 15px; flex-grow: 1; }
+        .card-list { list-style: none; margin-bottom: 18px; }
+        .card-list li { font-size: 0.85rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .card-list li::before { content: "✓"; color: var(--gold); font-weight: bold; }
+        
+        /* Calculadoras y Formularios */
+        .tool-box { background: var(--light-bg); padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .tool-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: var(--blue-dark); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem; }
+        .result-box { background: var(--white); padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid var(--gold); }
+        .gold-text { color: var(--gold-dark); font-size: 1.6rem; font-weight: 800; }
+        
+        /* Footer */
+        .footer { background-color: var(--blue-dark); color: var(--white); text-align: center; padding: 25px 20px; font-size: 0.85rem; border-top: 3px solid var(--gold); }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado con la R estilizada arriba a la izquierda -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#inicio" class="logo-container">
+                <!-- Emblema de la R estilizada en Dorado y Azul -->
+                <div class="brand-icon-r">R</div>
+                <div class="logo-text">
+                    <span class="brand-title">GRUPO REYNA</span>
+                    <span class="brand-sub">SERVICIOS MÚLTIPLES</span>
+                </div>
+            </a>
+            <nav class="navbar">
+                <a href="#inicio" class="nav-link active">Inicio</a>
+                <a href="#servicios" class="nav-link">Servicios</a>
+                <a href="#herramientas" class="nav-link">Calculadoras</a>
+                <a href="#contacto" class="nav-link">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Principal / Hero -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <span class="hero-badge"><i class="fas fa-shield-alt"></i> Calidad, Seguridad & Confianza</span>
+            <h1>Soluciones Integrales para Tu Futuro Financiero</h1>
+            <p>Especialistas en vehículos de subasta, inversión y empeño de oro, soluciones inmobiliarias, cambio de divisas y asesoría legal.</p>
+            <div class="hero-buttons">
+                <a href="#servicios" class="btn btn-primary">Ver Servicios</a>
+                <a href="https://wa.me/18495065083" target="_blank" class="btn btn-gold"><i class="fab fa-whatsapp"></i> Contactar por WhatsApp</a>
+            </div>
+            <div class="quote-card">
+                <p><i class="fas fa-quote-left"></i> "Dios es quien abre caminos donde no los hay; sus planes son perfectos y en su tiempo todo se cumplirá."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Servicios -->
+    <section id="servicios" class="section">
+        <div class="section-title">
+            <h2>Nuestros Servicios Destacados</h2>
+            <p>Conoce las marcas y soluciones que integran al Grupo Reyna</p>
+        </div>
+
+        <div class="grid grid-3">
+            <!-- 1. Reyna Auto Import -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="WhatsApp_Image_2026-08-29_at_9.47.22_PM_(1).png" alt="Reyna Auto Import" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80'">
+                    <div class="card-badge"><i class="fas fa-car"></i> Auto Import</div>
+                </div>
+                <div class="card-body">
+                    <h3>Reyna Auto Import</h3>
+                    <p>Compra e importación de vehículos directos desde subastas en EE. UU. (Copart, IAAI). Traemos el vehículo que buscas al mejor precio.</p>
+                    <ul class="card-list">
+                        <li>Subastas directas EE. UU.</li>
+                        <li>Gestión aduanal completa</li>
+                        <li>Inspección y traslados</li>
+                    </ul>
+                    <a href="https://wa.me/18495065083?text=Hola,%20solicito%20información%20sobre%20importación%20de%20vehículos" target="_blank" class="btn btn-primary btn-full">Consultar Vehículos</a>
+                </div>
+            </div>
+
+            <!-- 2. Dota Credit - Oro -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="WhatsApp_Image_2026-08-29_at_9.47.22_PM.png" alt="Dota Credit" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=600&q=80'">
+                    <div class="card-badge badge-gold"><i class="fas fa-coins"></i> Dota Credit</div>
+                </div>
+                <div class="card-body">
+                    <h3>Dota Credit - Oro</h3>
+                    <p><strong>Invertir en Oro es proteger tu dinero.</strong> Compramos, vendemos y empeñamos tu oro con la máxima tasa de tasación del mercado.</p>
+                    <ul class="card-list">
+                        <li>Compra y venta de prendas</li>
+                        <li>Empeños inmediatos</li>
+                        <li>Valoración justa por quilate</li>
+                    </ul>
+                    <a href="https://wa.me/18495065083?text=Hola,%20deseo%20cotizar%20o%20empeñar%20oro" target="_blank" class="btn btn-gold btn-full">Cotizar Oro</a>
+                </div>
+            </div>
+
+            <!-- 3. Compra de Dólares -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="WhatsApp_Image_2026-08-29_at_9.47.22_PM_(3).png" alt="Cambio Divisas" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=600&q=80'">
+                    <div class="card-badge"><i class="fas fa-dollar-sign"></i> Cambio Divisas</div>
+                </div>
+                <div class="card-body">
+                    <h3>Compra de Dólares</h3>
+                    <p>Ofrecemos la mejor tasa para la compra y cambio de dólares (USD) a pesos dominicanos (DOP). Transacciones rápidas y seguras.</p>
+                    <ul class="card-list">
+                        <li>Tasa preferencial garantizada</li>
+                        <li>Pago en efectivo o transferencia</li>
+                        <li>Atención personalizada</li>
+                    </ul>
+                    <a href="#herramientas" class="btn btn-primary btn-full">Ver Conversor</a>
+                </div>
+            </div>
+
+            <!-- 4. Inmobiliaria Hermanos Reyna -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="WhatsApp_Image_2026-08-29_at_9.47.22_PM_(3).png" alt="Inmobiliaria Hermanos Reyna" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80'">
+                    <div class="card-badge badge-gold"><i class="fas fa-building"></i> Inmobiliaria</div>
+                </div>
+                <div class="card-body">
+                    <h3>Inmobiliaria Hermanos Reyna</h3>
+                    <p>Alquiler, compra y venta de casas, apartamentos, locales comerciales y solares en El Seibo y zonas aledañas.</p>
+                    <ul class="card-list">
+                        <li>Alquiler de inmuebles</li>
+                        <li>Venta de propiedades</li>
+                        <li>Administración de alquileres</li>
+                    </ul>
+                    <a href="https://wa.me/18495065083?text=Hola,%20busco%20información%20inmobiliaria" target="_blank" class="btn btn-gold btn-full">Ver Propiedades</a>
+                </div>
+            </div>
+
+            <!-- 5. Préstamos & Financiamientos -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="WhatsApp_Image_2026-08-29_at_9.47.22_PM_(3).png" alt="Préstamos y Financiamientos" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80'">
+                    <div class="card-badge"><i class="fas fa-hand-holding-usd"></i> Financiamiento</div>
+                </div>
+                <div class="card-body">
+                    <h3>Préstamos & Financiamientos</h3>
+                    <p>Obtén el capital que necesitas con las mejores condiciones, garantizado con vehículos u oro con pronta aprobación.</p>
+                    <ul class="card-list">
+                        <li>Desembolso inmediato</li>
+                        <li>Plazos flexibles</li>
+                        <li>Mínimos requisitos</li>
+                    </ul>
+                    <a href="#herramientas" class="btn btn-primary btn-full">Calcular Préstamo</a>
+                </div>
+            </div>
+
+            <!-- 6. Reyna & Asociados -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="WhatsApp_Image_2026-10-18_at_4.19.56_PM.png" alt="Reyna & Asociados" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80'">
+                    <div class="card-badge badge-gold"><i class="fas fa-balance-scale"></i> Asuntos Legales</div>
+                </div>
+                <div class="card-body">
+                    <h3>Reyna & Asociados</h3>
+                    <p>Bufete de abogados especializados en derecho civil, laboral, penal, inmobiliario y asuntos migratorios.</p>
+                    <ul class="card-list">
+                        <li>Derecho Penal y Civil</li>
+                        <li>Derecho Inmobiliario y Laboral</li>
+                        <li>Derecho Migratorio</li>
+                    </ul>
+                    <a href="https://wa.me/18495065083?text=Hola,%20requiero%20una%20consulta%20legal" target="_blank" class="btn btn-gold btn-full">Consulta Legal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Herramientas Interactivas (Calculadoras) -->
+    <section id="herramientas" class="section bg-light">
+        <div class="section-title">
+            <h2>Calculadoras Interactivas</h2>
+            <p>Simula cuotas de préstamos o la conversión de tus dólares en tiempo real</p>
+        </div>
+
+        <div class="grid grid-2">
+            <!-- Simulador de Préstamos -->
+            <div class="tool-box">
+                <div class="tool-header">
+                    <i class="fas fa-calculator fa-2x"></i>
+                    <h3>Simulador de Préstamos</h3>
+                </div>
+                <div class="form-group">
+                    <label>Monto a solicitar (RD$):</label>
+                    <input type="number" id="loanAmount" placeholder="Ej: 50000" value="50000">
+                </div>
+                <div class="form-group">
+                    <label>Tasa de interés mensual (%):</label>
+                    <input type="number" id="loanRate" value="3.0" step="0.5">
+                </div>
+                <div class="form-group">
+                    <label>Plazo en meses:</label>
+                    <select id="loanMonths">
+                        <option value="6">6 Meses</option>
+                        <option value="12" selected>12 Meses</option>
+                        <option value="18">18 Meses</option>
+                        <option value="24">24 Meses</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-full" id="btnCalculateLoan">Calcular Cuota</button>
+                <div class="result-box" id="loanResult" style="display:none;">
+                    <p>Cuota Mensual Estimada: <strong id="monthlyPayment">RD$ 0.00</strong></p>
+                    <p>Total de Intereses: <span id="totalInterest">RD$ 0.00</span></p>
+                </div>
+            </div>
+
+            <!-- Conversor USD a DOP -->
+            <div class="tool-box">
+                <div class="tool-header">
+                    <i class="fas fa-exchange-alt fa-2x"></i>
+                    <h3>Calculadora de Dólares (USD / DOP)</h3>
+                </div>
+                <div class="form-group">
+                    <label>Tasa de Cambio estimada (1 USD = DOP$):</label>
+                    <input type="number" id="usdRate" value="60.50" step="0.10">
+                </div>
+                <div class="form-group">
+                    <label>Monto en Dólares (USD $):</label>
+                    <input type="number" id="usdAmount" placeholder="Ej: 500" value="500">
+                </div>
+                <div class="result-box">
+                    <p>Recibirás aproximadamente:</p>
+                    <h3 class="gold-text" id="dopTotal">RD$ 30,250.00</h3>
+                    <a href="https://wa.me/18495065083?text=Hola,%20deseo%20cambiar%20dólares" id="btnExchangeWhatsapp" target="_blank" class="btn btn-gold btn-full" style="margin-top:15px;">
+                        <i class="fab fa-whatsapp"></i> Cambiar Dólares Ahora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Información de Contacto Directa -->
+    <section id="contacto" class="section">
+        <div class="section-title">
+            <h2>Contacto y Ubicación</h2>
+            <p>Visítanos en nuestras oficinas o contáctanos directamente</p>
+        </div>
+
+        <div class="grid grid-2">
+            <div class="contact-info">
+                <h3>Atención Directa</h3>
+                <p>En Grupo Reyna estamos listos para atender tus requerimientos con honestidad y rapidez.</p>
+                <div class="info-item" style="display:flex; gap:12px; margin-bottom:15px;">
+                    <i class="fas fa-map-marker-alt" style="color:var(--gold); font-size:1.3rem;"></i>
+                    <div>
+                        <strong>Ubicación Oficial:</strong>
+                        <p>C/26 de Febrero, Sector Los Cajuiles, Res. Don Mimí, Nivel 1, El Seibo, Rep. Dom.</p>
+                    </div>
+                </div>
+                <div class="info-item" style="display:flex; gap:12px; margin-bottom:15px;">
+                    <i class="fas fa-phone-alt" style="color:var(--gold); font-size:1.3rem;"></i>
+                    <div>
+                        <strong>Teléfono Principal / WhatsApp:</strong>
+                        <p><a href="tel:8495065083">(849) 506-5083</a></p>
+                    </div>
+                </div>
+                <div class="info-item" style="display:flex; gap:12px; margin-bottom:15px;">
+                    <i class="fas fa-car" style="color:var(--gold); font-size:1.3rem;"></i>
+                    <div>
+                        <strong>Línea Auto Import / Subastas:</strong>
+                        <p><a href="tel:7864164346">(786) 416-4346</a></p>
+                    </div>
+                </div>
+                <div class="info-item" style="display:flex; gap:12px; margin-bottom:15px;">
+                    <i class="fab fa-instagram" style="color:var(--gold); font-size:1.3rem;"></i>
+                    <div>
+                        <strong>Instagram Oficial:</strong>
+                        <p>@GRUPOREYNARD</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card" style="background:var(--white); padding:25px; border-radius:12px; border:1px solid #e2e8f0;">
+                <h3 style="margin-bottom:15px; color:var(--blue-dark);">Envíanos un Mensaje Directo</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>Nombre Completo:</label>
+                        <input type="text" id="cName" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Servicio Requerido:</label>
+                        <select id="cService">
+                            <option value="Vehículos de Subasta">Reyna Auto Import</option>
+                            <option value="Compra/Empeño de Oro">Dota Credit (Oro)</option>
+                            <option value="Préstamos / Financiamiento">Préstamos</option>
+                            <option value="Cambio de Dólares">Compra de Dólares</option>
+                            <option value="Inmobiliaria">Inmuebles (Alquiler/Venta)</option>
+                            <option value="Asesoría Legal">Reyna & Asociados (Abogados)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensaje:</label>
+                        <textarea id="cMessage" rows="3" placeholder="Detalla tu consulta..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-gold btn-full"><i class="fab fa-whatsapp"></i> Enviar a WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Grupo Reyna - Servicios Múltiples. El Seibo, República Dominicana.</p>
+    </footer>
+
+    <!-- Lógica interactiva JS -->
+    <script src="script.js"></script>
+</body>
+</html>
